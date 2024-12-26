@@ -1,6 +1,8 @@
 ## HyperionNG_Githubdater
 
 Small script to scan, download and install HyperionNG from workflows in actions.
+Written in python 2.7 for vu+ enigma2 and similar
+
 This script only work with github-token.
 1. Open https://github.com/settings/profile
 2. Left down to developer settings
