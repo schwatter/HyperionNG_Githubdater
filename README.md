@@ -15,7 +15,7 @@ This script only work with github-token.
 
 The intern workdir is /tmp, so that the script can rest for example in persistent /home.
 Start the script with
-'''
+```
 root@vuultimo4k:~# cd /home
 root@vuultimo4k:/home# python HyperionNG_Githubdater.py
-'''
+```
