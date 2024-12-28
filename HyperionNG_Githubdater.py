@@ -125,6 +125,7 @@ def install_file():
             print "Abgebrochen."
         elif 1 <= choice <= len(tar_files):
             selected_file = tar_files[choice - 1]
+            os.system("/etc/init.d/hyperion stop")
             # Entpacken des Archives
             tar_file_path = os.path.join("/tmp", selected_file)
             os.system("tar -xvf {} -C /tmp/".format(tar_file_path))
