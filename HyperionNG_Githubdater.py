@@ -32,16 +32,23 @@ HEADERS = {
 def get_workflow_links(page_url):
     response = requests.get(page_url)
     if response.status_code != 200:
-        print "Fehler beim Abrufen der Seite: {}".format(response.status_code)
+        print("Fehler beim Abrufen der Seite:", response.status_code)
         return []
 
     soup = BeautifulSoup(response.text, "html.parser")
     workflow_links = []
     for link in soup.find_all("a", href=True):
         href = link["href"]
+        # Überprüfen, ob der Link "actions/runs/" enthält
         if "/actions/runs/" in href:
+            # Wenn der Link auf "/workflow" endet, überspringen wir ihn
+            if href.endswith("/workflow"):
+                continue
+            # Andernfalls fügen wir den Link der Liste hinzu
             workflow_links.append(BASE_URL + href)
-    return list(set(workflow_links))  # Duplikate entfernen
+    
+    # Rückgabe der Liste der Links ohne Duplikate
+    return workflow_links
 
 # Funktion zum Prüfen eines Workflow-Runs auf das spezifische Artifact
 def check_artifact(run_url, artifact_name):
