@@ -19,3 +19,6 @@ Start the script with
 root@vuultimo4k:~# cd /home
 root@vuultimo4k:/home# python HyperionNG_Githubdater.py
 ```
+
+If you have HyperHdr installed, use this updater:
+https://github.com/schwatter/HyperHdr_Githubdater
