@@ -3,9 +3,9 @@
 """    Update HyperionNG direct from github actions    """	
 
 __progname__    = "HyperionNG_Githubdater"
-__version__     = "1.0"
+__version__     = "1.1"
 __author__      = "schwatter"
-__date__        = "2024-12-26"
+__date__        = "2024-12-29"
 
 import os
 import requests
@@ -132,14 +132,21 @@ def install_file():
             print "Abgebrochen."
         elif 1 <= choice <= len(tar_files):
             selected_file = tar_files[choice - 1]
+            # Stoppe HyperionNG
+            print "Stoppe HyperionNG"
             os.system("/etc/init.d/hyperion stop")
+            # Erstelle Backup
+            print "Erstelle Backup nach /usr/share/hyperion_s"
+            os.system("rm -rf /usr/share/hyperion_s")
+            os.system("mkdir /usr/share/hyperion_s")
+            os.system("cp -r /usr/share/hyperion /usr/share/hyperion_s")
             # Entpacken des Archives
             tar_file_path = os.path.join("/tmp", selected_file)
             os.system("tar -xvf {} -C /tmp/".format(tar_file_path))
             # Entfernen des alten Verzeichnisses und Kopieren des neuen
             os.system("rm -rf /usr/share/hyperion")
             os.system("cp -r /tmp/share/hyperion /usr/share")
-            print "Installation abgeschlossen. Bitte mache einen vollstaendigen Neustart."
+            print "Installation abgeschlossen. Vollstaendiger Neustart notwendig."
             os.system("rm -rf /tmp/bin")
             os.system("rm -rf /tmp/share")
             os.system("rm -rf /tmp/debian_buster_armv7.zip")
